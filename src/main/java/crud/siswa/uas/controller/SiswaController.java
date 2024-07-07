@@ -29,7 +29,7 @@ public class SiswaController {
     @Autowired
     private SiswaService siswaService;
 
-    @GetMapping("/siswa")
+    @GetMapping()
     public ResponseEntity<MahasiswaListResponse> getSiswa(
         @ModelAttribute MahasiswaRequestDto mahasiswaRequestDto,
         PageRequest pageRequest
