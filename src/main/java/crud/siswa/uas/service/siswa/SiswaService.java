@@ -109,9 +109,10 @@ public class SiswaService {
 
 // Method to update an existing Siswa
     @Transactional
-    public ResponseEntity<MahasiswaResponse> updateSiswa(MahasiswaUpdateRequestDto mahasiswaUpdateRequestDto) {
+    public ResponseEntity<MahasiswaResponse> updateSiswa(Integer siswaId, MahasiswaUpdateRequestDto mahasiswaUpdateRequestDto) {
         
-        Siswa existingSiswa = siswaRepository.findById(mahasiswaUpdateRequestDto.getSiswaId()).orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("siswa.not.found", null, Locale.getDefault())));
+        Siswa existingSiswa = siswaRepository.findById(siswaId)
+                .orElseThrow(() -> new EntityNotFoundException("Siswa not found with id: " + siswaId));
         
         TahunAjaran tahunAjaran = tahunAjaranRepository.findById(mahasiswaUpdateRequestDto.getTaId())
                 .orElseThrow(() -> new RuntimeException("Tahun Ajaran not found")); // Customize exception as needed

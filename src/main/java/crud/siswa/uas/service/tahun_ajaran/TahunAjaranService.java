@@ -85,8 +85,9 @@ public class TahunAjaranService {
     }
 
     @Transactional
-    public ResponseEntity<TahunAjaranResponse> updateTahunAjaran(TahunAjaranUpdateRequestDto tahunAjaranUpdateRequestDto) {
-        TahunAjaran existingTA = tahunAjaranRepository.findById(tahunAjaranUpdateRequestDto.getTaId()).orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("tahun.ajaran.not.found", null, Locale.getDefault())));
+    public ResponseEntity<TahunAjaranResponse> updateTahunAjaran(Integer taId, TahunAjaranUpdateRequestDto tahunAjaranUpdateRequestDto) {
+        TahunAjaran existingTA = tahunAjaranRepository.findById(taId)
+            .orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("tahun.ajaran.not.found", null, Locale.getDefault())));
         
         existingTA.setPeriode(tahunAjaranUpdateRequestDto.getPeriode());
         existingTA.setTglMulai(tahunAjaranUpdateRequestDto.getTglMulai());

@@ -2,6 +2,7 @@ package crud.siswa.uas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ import crud.siswa.uas.service.komponen.KomponenService;
 
 @RestController
 @RequestMapping("/api/komponen")
+@CrossOrigin(origins = "http://localhost:4200")
 public class KomponenController {
     @Autowired
     private KomponenService komponenService;
@@ -40,9 +42,9 @@ public class KomponenController {
         return komponenService.createKomponen(komponenCreateRequestDto);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<KomponenResponse> updateSiswa(@RequestBody KomponenUpdateRequestDto komponenUpdateRequestDto) {
-        return komponenService.updateKomponen(komponenUpdateRequestDto);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<KomponenResponse> updateSiswa(@PathVariable("id") Integer komponenId, @RequestBody KomponenUpdateRequestDto komponenUpdateRequestDto) {
+        return komponenService.updateKomponen(komponenId, komponenUpdateRequestDto);
     }
     
 

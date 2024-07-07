@@ -2,6 +2,7 @@ package crud.siswa.uas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ import crud.siswa.uas.service.tahun_ajaran.TahunAjaranService;
 
 @RestController
 @RequestMapping("/api/tahun-ajaran")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TahunAjaranController {
 
     @Autowired
@@ -41,9 +43,9 @@ public class TahunAjaranController {
         return tahunAjaranService.createTahunAjaran(tahunAjaranCreateRequestDto);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<TahunAjaranResponse> updateTahunAjaran(@RequestBody TahunAjaranUpdateRequestDto tahunAjaranUpdateRequestDto) {
-        return tahunAjaranService.updateTahunAjaran(tahunAjaranUpdateRequestDto);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<TahunAjaranResponse> updateTahunAjaran(@PathVariable("id") Integer taId, @RequestBody TahunAjaranUpdateRequestDto tahunAjaranUpdateRequestDto) {
+        return tahunAjaranService.updateTahunAjaran(taId, tahunAjaranUpdateRequestDto);
     }
     
 

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MahasiswaUpdateRequestDto {
-    private Integer siswaId;
     private Integer taId;
     private String nisn;
     private String namaLengkap;

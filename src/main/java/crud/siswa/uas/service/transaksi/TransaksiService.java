@@ -138,9 +138,10 @@ public class TransaksiService {
 
 // Method to update an existing Siswa
     @Transactional
-    public ResponseEntity<TransaksiResponse> updateTransaksi(TransaksiUpdateRequestDto transaksiUpdateRequestDto) {
+    public ResponseEntity<TransaksiResponse> updateTransaksi(Integer transaksiId, TransaksiUpdateRequestDto transaksiUpdateRequestDto) {
         
-        Transaksi existingTransaksi = transaksiRepository.findById(transaksiUpdateRequestDto.getTransaksiId()).orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("transaksi.not.found", null, Locale.getDefault())));
+        Transaksi existingTransaksi = transaksiRepository.findById(transaksiId)
+            .orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("transaksi.not.found", null, Locale.getDefault())));
         
         TahunAjaran tahunAjaran = tahunAjaranRepository.findById(transaksiUpdateRequestDto.getTaId())
                 .orElseThrow(() -> new RuntimeException("Transaksi not found")); // Customize exception as needed

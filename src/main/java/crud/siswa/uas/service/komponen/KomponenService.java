@@ -107,9 +107,10 @@ public class KomponenService {
 
 // Method to update an existing Siswa
     @Transactional
-    public ResponseEntity<KomponenResponse> updateKomponen(KomponenUpdateRequestDto komponenUpdateRequestDto) {
+    public ResponseEntity<KomponenResponse> updateKomponen(Integer komponenId, KomponenUpdateRequestDto komponenUpdateRequestDto) {
         
-        Komponen existingKomponen = komponenRepository.findById(komponenUpdateRequestDto.getKomponenId()).orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("komponen.not.found", null, Locale.getDefault())));
+        Komponen existingKomponen = komponenRepository.findById(komponenId)
+            .orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("komponen.not.found", null, Locale.getDefault())));
         
         TahunAjaran tahunAjaran = tahunAjaranRepository.findById(komponenUpdateRequestDto.getTaId())
                 .orElseThrow(() -> new RuntimeException("Tahun Ajaran not found")); // Customize exception as needed
